@@ -1,0 +1,27 @@
+<!-- dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - ERP Ponpes{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Dashboard</h2>
+    <div class="dashboard-summary">
+        <div class="card">
+            <h3>Halo, {{ session['nama_lengkap'] }}</h3>
+            <p>Role: {{ session['role'] }}</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>{{ jumlah_user }}</h3>
+                <p>User Aktif</p>
+            </div>
+            <div class="card">
+                <h3>{{ jumlah_santri }}</h3>
+                <p>Santri Terdaftar</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

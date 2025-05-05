@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Daftar Santri{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Daftar Santri</h2>
+
+    <form method="GET" action="{{ url_for('list_santri') }}">
+        <div class="form-group">
+            <input type="text" name="q" placeholder="Cari Nama atau NIS..." value="{{ request.args.get('q', '') }}">
+        </div>
+        <button type="submit" class="btn">Cari</button>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>NIS</th>
+                <th>Nama Lengkap</th>
+                <th>Kelas</th>
+                <th>Kamar</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for santri in santri_list %}
+            <tr>
+                <td>{{ santri['nis'] }}</td>
+                <td>{{ santri['nama_lengkap'] }}</td>
+                <td>{{ santri['kelas'] }}</td>
+                <td>{{ santri['kamar'] }}</td>
+                <td>
+                    {% if santri['status'] == 'Aktif' %}
+                        <span class="badge-aktif">Aktif</span>
+                    {% else %}
+                        <span class="badge-tidak-aktif">{{ santri['status'] }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('detail_santri', id=santri['id_santri']) }}" class="btn-detail">Detail</a>
+                    <a href="{{ url_for('edit_santri', id=santri['id_santri']) }}" class="btn-edit">Edit</a>
+                    <a href="{{ url_for('hapus_santri', id=santri['id_santri']) }}" class="btn-delete" onclick="return confirm('Yakin ingin menghapus santri ini?')">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>
+    <a href="{{ url_for('tambah_santri') }}" class="btn-invt">Tambah Santri</a>
+    <a href="{{ url_for('import_santri') }}" class="btn-export">Import Excel</a>
+    <a href="{{ url_for('export_santri') }}" class="btn-export">Export Excel</a>
+</div>
+{% endblock %}

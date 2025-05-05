@@ -1,0 +1,46 @@
+<!-- list_user.html -->
+{% extends 'base.html' %}
+
+{% block title %}Daftar User - ERP Ponpes{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Daftar User</h2>
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>
+    <a href="{{ url_for('tambah_user') }}" class="btn-invt">Tambah User</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Nama Lengkap</th>
+                <th>Role</th>
+                <th>Email</th>
+                <th>No HP</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.nama_lengkap }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.no_hp }}</td>
+                <td>
+                    {% if user.is_active == 1 %}
+                        <span class="badge-aktif">Aktif</span>
+                    {% else %}
+                        <span class="badge-tidak-aktif">Tidak Aktif</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('hapus_user', id=user.id_user) }}" class="btn-delete" onclick="return confirm('Yakin ingin menghapus user ini?')">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

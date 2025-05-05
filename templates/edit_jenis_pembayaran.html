@@ -1,0 +1,26 @@
+<!-- edit_jenis_pembayaran.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Jenis Pembayaran{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Edit Jenis Pembayaran</h2>
+
+    <form method="POST" action="">
+        <div class="form-group">
+            <label for="nama_pembayaran">Nama Pembayaran</label>
+            <input type="text" id="nama_pembayaran" name="nama_pembayaran" value="{{ jenis['nama_pembayaran'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nominal_default">Nominal Default</label>
+            <input type="text" id="nominal_default" name="nominal_default" value="{{ jenis['nominal_default'] }}" required>
+        </div>
+
+        <button type="submit" class="btn">Update</button>
+    </form>
+
+    <a href="{{ url_for('list_jenis_pembayaran') }}" class="btn-back">Kembali</a>
+</div>
+{% endblock %}

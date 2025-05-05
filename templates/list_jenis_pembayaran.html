@@ -1,0 +1,35 @@
+<!-- list_jenis_pembayaran.html -->
+{% extends 'base.html' %}
+
+{% block title %}Daftar Jenis Pembayaran{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Daftar Jenis Pembayaran</h2>
+
+    <a href="{{ url_for('tambah_jenis_pembayaran') }}" class="btn">Tambah Baru</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama Pembayaran</th>
+                <th>Nominal Default</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jenis in jenis_list %}
+            <tr>
+                <td>{{ jenis['nama_pembayaran'] }}</td>
+                <td>Rp {{ '{:,.0f}'.format(jenis['nominal_default']) }}</td>
+                <td>
+                    <a href="{{ url_for('edit_jenis_pembayaran', id=jenis['id_jenis']) }}" class="btn-edit">Edit</a>
+                    <a href="{{ url_for('hapus_jenis_pembayaran', id=jenis['id_jenis']) }}" class="btn-delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

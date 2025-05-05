@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Daftar Backup Database{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h2>Daftar Backup Database</h2>
+
+    {% if backups %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama File</th>
+                <th>Ukuran (KB)</th>
+                <th>Terakhir Dimodifikasi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for backup in backups %}
+            <tr>
+                <td>{{ backup.filename }}</td>
+                <td>{{ backup.size_kb }}</td>
+                <td>{{ backup.modified }}</td>
+                <td>
+                    <a href="{{ url_for('download_backup', filename=backup.filename) }}" class="btn">Download</a>
+                    <a href="{{ url_for('hapus_backup', filename=backup.filename) }}" class="btn-delete" onclick="return confirm('Yakin ingin menghapus backup ini?')">Hapus</a>
+                    <a href="{{ url_for('restore_backup', filename=backup.filename) }}" class="btn" onclick="return confirm('Yakin ingin restore database dari backup ini? Semua data sekarang akan diganti.')">Restore</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Tidak ada file backup tersedia.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>
+</div>
+{% endblock %}

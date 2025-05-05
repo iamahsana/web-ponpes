@@ -1,0 +1,14 @@
+<!-- base_menu.html -->
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <h2>ERP Ponpes</h2>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="{{ url_for('dashboard') }}">🏠 Dashboard</a></li>
+        <li><a href="{{ url_for('list_santri') }}">🧑‍🎓 Data Santri</a></li>
+        <li><a href="{{ url_for('list_pembayaran') }}">💳 Pembayaran</a></li>
+        <li><a href="{{ url_for('rekap_tahunan') }}">📊 Laporan Tahunan</a></li>
+        <li><a href="{{ url_for('settings_aplikasi') }}">⚙️ Settings</a></li>
+        <li><a href="{{ url_for('logout') }}">🔓 Logout</a></li>
+    </ul>
+</aside>

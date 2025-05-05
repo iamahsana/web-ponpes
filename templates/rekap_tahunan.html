@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Rekap Keuangan Tahunan{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Rekap Keuangan Tahunan</h2>
+
+    <!-- Tombol Export -->
+    <a href="{{ url_for('export_rekap_tahunan', tahun=tahun) }}" class="btn-export">Export Rekap Tahunan</a>
+
+    <!-- Form Filter Tahun -->
+    <form method="GET" action="{{ url_for('rekap_tahunan') }}" class="form-filter">
+        <div class="form-group-inline">
+            <label for="tahun">Tahun:</label>
+            <input type="text" name="tahun" id="tahun" value="{{ tahun or '' }}" required>
+        </div>
+        <button type="submit" class="btn">Tampilkan</button>
+    </form>
+
+    {% if rekap_list %}
+    <!-- Tabel Rekap Tahunan -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bulan</th>
+                <th>Total Pemasukan</th>
+                <th>Total Tunggakan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in rekap_list %}
+            <tr>
+                <td>{{ item['bulan'] }}</td>
+                <td>Rp {{ '{:,.0f}'.format(item['total_pemasukan']) }}</td>
+                <td>Rp {{ '{:,.0f}'.format(item['total_tunggakan']) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total Pemasukan Tahun Ini: Rp {{ '{:,.0f}'.format(total_pemasukan) }}</h3>
+    <h3>Total Tunggakan Tahun Ini: Rp {{ '{:,.0f}'.format(total_tunggakan) }}</h3>
+
+    
+    <!-- (Opsional) Grafik Bar di sini nanti -->
+    {% endif %}
+{% if rekap_list %}
+<a href="{{ url_for('export_rekap_tahunan', tahun=tahun) }}" class="btn-export">Export Rekap Tahunan</a>
+
+<h3 style="margin-top: 40px;">Grafik Pemasukan Tahunan</h3>
+<canvas id="grafikTahunan" data-labels="{{ bulan_labels | tojson }}" data-data="{{ total_values | tojson }}" width="400" height="200"></canvas>
+{% endif %}
+
+</div>
+{% endblock %}

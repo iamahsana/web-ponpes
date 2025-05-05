@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Import Data Santri{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Import Data Santri</h2>
+    <form action="{{ url_for('import_santri') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Pilih File Excel atau CSV (.xlsx, .xls, .csv)</label>
+            <input type="file" name="file" id="file" accept=".xlsx,.xls,.csv" required>
+        </div>
+        <button type="submit" class="btn">Upload & Import</button>
+    </form>
+    <p style="margin-top: 1rem;">
+        Download template:
+        <a href="{{ url_for('download_template_santri') }}" class="btn btn-success">Download Template Excel</a>
+    </p>
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>
+</div>
+{% endblock %}

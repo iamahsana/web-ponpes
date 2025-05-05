@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}ERP Ponpes{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- HEADER -->
+    <header class="top-nav">
+      <div class="logo">Ponpes Miftahul Ulum Amtsilati</div>
+      <ul class="nav-menu">
+        {% if session.role == 'admin' %}
+          <a href="{{ url_for('list_user') }}">User</a>  
+          <a href="{{ url_for('list_santri') }}">Data Santri</a>
+          <a href="{{ url_for('settings_aplikasi') }}">Settings</a>
+          <a href="{{ url_for('list_backup') }}">Backup Database</a>
+          <a href="{{ url_for('backup_database') }}">Backup Sekarang</a>
+        {% elif session.role == 'bendahara' %}
+          <a href="{{ url_for('list_pembayaran') }}">Pembayaran</a>
+          <a href="{{ url_for('tambah_pembayaran') }}">Tambah Pembayaran</a>
+          <a href="{{ url_for('laporan_bulanan') }}">Laporan</a>
+          <a href="{{ url_for('rekap_tahunan') }}">Rekap</a>
+          <a href="{{ url_for('backup_database') }}">Backup Database</a>
+        {% elif session.role == 'keuangan' %}
+          <a href="{{ url_for('rekap_tahunan') }}">Laporan</a>
+          <a href="{{ url_for('backup_database') }}">Backup Database</a>
+        {% endif %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </ul>
+    </header>
+
+    <!-- KONTEN -->
+    <main class="main-content">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <p>&copy; 2025 I_amahsana</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Detail Santri{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Detail Santri</h2>
+
+    <div class="detail-card">
+        <p><strong>NIS:</strong> {{ santri['nis'] }}</p>
+        <p><strong>Nama Lengkap:</strong> {{ santri['nama_lengkap'] }}</p>
+        <p><strong>Tempat, Tanggal Lahir:</strong> {{ santri['tempat_lahir'] }}, {{ santri['tanggal_lahir'] }}</p>
+        <p><strong>Jenis Kelamin:</strong> {{ santri['jenis_kelamin'] }}</p>
+        <p><strong>Alamat:</strong> {{ santri['alamat'] }}</p>
+        <p><strong>No HP:</strong> {{ santri['no_hp'] }}</p>
+        <p><strong>Wali Santri:</strong> {{ santri['wali_santri'] }}</p>
+        <p><strong>Kelas:</strong> {{ santri['kelas'] }}</p>
+        <p><strong>Kamar:</strong> {{ santri['kamar'] }}</p>
+        <p><strong>Status:</strong> {{ santri['status'] }}</p>
+        <p><strong>Tanggal Masuk:</strong> {{ santri['tanggal_masuk'] }}</p>
+
+        {% if santri['foto'] %}
+        <div class="foto-container">
+            <img src="{{ url_for('static', filename='uploads/' + santri['foto']) }}" alt="Foto Santri" class="foto-santri">
+        </div>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('list_santri') }}" class="btn">Kembali ke Daftar Santri</a>
+</div>
+{% endblock %}

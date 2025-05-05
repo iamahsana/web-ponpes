@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Tambah Pembayaran{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Tambah Pembayaran Santri</h2>
+
+    <form method="POST" action="">
+        <div class="form-grid">
+            
+            <div class="form-group position-relative">
+                <label for="santri_search">Cari Santri (NIS/Nama)</label>
+                <input type="text" id="santri_search" placeholder="Ketik NIS atau Nama Santri">
+                <input type="hidden" name="id_santri" id="id_santri" required>
+                <div id="santri_results" class="dropdown-search-results"></div>
+            </div>            
+    
+            <div class="form-group">
+                <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                <select name="jenis_pembayaran" id="jenis_pembayaran" required>
+                    <option value="">-- Pilih Jenis --</option>
+                    {% for jenis in jenis_list %}
+                    <option value="{{ jenis['nama_pembayaran'] }}">{{ jenis['nama_pembayaran'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="bulan">Bulan</label>
+                <input type="text" name="bulan" id="bulan" placeholder="contoh: Januari" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="tahun">Tahun</label>
+                <input type="text" name="tahun" id="tahun" placeholder="contoh: 2025" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="nominal_tagihan">Nominal Tagihan</label>
+                <input type="number" name="nominal_tagihan" id="nominal_tagihan" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="nominal_dibayar">Nominal Dibayar</label>
+                <input type="number" name="nominal_dibayar" id="nominal_dibayar" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="tanggal_bayar">Tanggal Bayar</label>
+                <input type="date" name="tanggal_bayar" id="tanggal_bayar" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="metode_bayar">Metode Pembayaran</label>
+                <select name="metode_bayar" id="metode_bayar" required>
+                    <option value="Cash">Cash</option>
+                    <option value="Transfer">Transfer</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="status_bayar">Status Pembayaran</label>
+                <select name="status_bayar" id="status_bayar" required>
+                    <option value="Lunas">Lunas</option>
+                    <option value="Belum Lunas">Belum Lunas</option>
+                </select>
+            </div>
+    
+            <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="catatan">Catatan</label>
+                <textarea name="catatan" id="catatan" rows="3"></textarea>
+            </div>
+        </div>
+    
+        <button type="submit" class="btn">Simpan Pembayaran</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>    
+</div>
+{% endblock %}

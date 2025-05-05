@@ -1,0 +1,11 @@
+{% extends 'base_page.html' %}
+
+{% block title %}ERP Ponpes - Home{% endblock %}
+
+{% block content %}
+<div class="home-page">
+    <h2>Selamat Datang di ERP Ponpes</h2>
+    <p>Pondok Pesantren Miftahul Ulum Amtsilati</p>
+    <a href="{{ url_for('login') }}" class="btn">Login</a>
+</div>
+{% endblock %}

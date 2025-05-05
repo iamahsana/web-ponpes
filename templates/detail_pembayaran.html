@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Detail Pembayaran{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Detail Pembayaran Santri</h2>
+
+    <div class="detail-box">
+        <p><strong>Nama Santri:</strong> {{ pembayaran['nama_lengkap'] }}</p>
+        <p><strong>Jenis Pembayaran:</strong> {{ pembayaran['jenis_pembayaran'] }}</p>
+        <p><strong>Bulan - Tahun:</strong> {{ pembayaran['bulan'] }} {{ pembayaran['tahun'] }}</p>
+        <p><strong>Nominal Tagihan:</strong> Rp {{ '{:,.0f}'.format(pembayaran['nominal_tagihan']) }}</p>
+        <p><strong>Nominal Dibayar:</strong> Rp {{ '{:,.0f}'.format(pembayaran['nominal_dibayar']) }}</p>
+        <p><strong>Tanggal Bayar:</strong> {{ pembayaran['tanggal_bayar'] }}</p>
+        <p><strong>Metode Pembayaran:</strong> {{ pembayaran['metode_bayar'] }}</p>
+        <p><strong>Status Bayar:</strong> {{ pembayaran['status_bayar'] }}</p>
+        <p><strong>Kasir:</strong> {{ pembayaran['kasir'] }}</p>
+        <p><strong>Catatan:</strong> {{ pembayaran['catatan'] }}</p>
+    </div>
+
+    <a href="{{ url_for('list_pembayaran') }}" class="btn-back">Kembali ke Daftar Pembayaran</a>
+</div>
+{% endblock %}

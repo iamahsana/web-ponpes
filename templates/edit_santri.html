@@ -1,0 +1,84 @@
+<!-- edit_santri.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Data Santri{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Edit Data Santri</h2>
+    <form method="POST" action="" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label>NIS</label>
+            <input type="text" name="nis" value="{{ santri['nis'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" name="nama_lengkap" value="{{ santri['nama_lengkap'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Tempat Lahir</label>
+            <input type="text" name="tempat_lahir" value="{{ santri['tempat_lahir'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal Lahir</label>
+            <input type="text" name="tanggal_lahir" value="{{ santri['tanggal_lahir'] }}" placeholder="YYYY-MM-DD">
+        </div>
+
+        <div class="form-group">
+            <label>Jenis Kelamin</label>
+            <input type="text" name="jenis_kelamin" value="{{ santri['jenis_kelamin'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Alamat</label>
+            <input type="text" name="alamat" value="{{ santri['alamat'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>No HP</label>
+            <input type="text" name="no_hp" value="{{ santri['no_hp'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Wali Santri</label>
+            <input type="text" name="wali_santri" value="{{ santri['wali_santri'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Kelas</label>
+            <input type="text" name="kelas" value="{{ santri['kelas'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Kamar</label>
+            <input type="text" name="kamar" value="{{ santri['kamar'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <input type="text" name="status" value="{{ santri['status'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal Masuk</label>
+            <input type="text" name="tanggal_masuk" value="{{ santri['tanggal_masuk'] }}" placeholder="YYYY-MM-DD">
+        </div>
+
+        <div class="form-group">
+            <label>Foto (URL)</label>
+            <input type="text" name="foto" value="{{ santri['foto'] }}">
+        </div>
+
+        <div class="form-group">
+            <label>Upload Foto</label>
+            <input type="file" name="foto">
+        </div>
+        
+        <button type="submit" class="btn">Update Santri</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Daftar Tunggakan{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Daftar Tunggakan Santri</h2>
+    <a href="{{ url_for('export_tunggakan') }}" class="btn-export">Export Tunggakan</a>
+    <!-- Form Filter Bulan Tahun -->
+    <form method="GET" action="{{ url_for('list_tunggakan') }}" class="form-filter">
+        <div class="form-group-inline">
+            <label for="bulan">Bulan:</label>
+            <select name="bulan" id="bulan">
+                <option value="">-- Semua Bulan --</option>
+                {% for b in ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'] %}
+                <option value="{{ b }}" {% if bulan == b %}selected{% endif %}>{{ b }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group-inline">
+            <label for="tahun">Tahun:</label>
+            <input type="text" name="tahun" id="tahun" value="{{ tahun or '' }}">
+        </div>
+
+        <button type="submit" class="btn">Filter</button>
+    </form>
+    
+    <!-- Tabel Tunggakan -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama Santri</th>
+                <th>Jenis Pembayaran</th>
+                <th>Bulan - Tahun</th>
+                <th>Tagihan</th>
+                <th>Dibayar</th>
+                <th>Kekurangan</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pembayaran in tunggakan_list %}
+            <tr>
+                <td>{{ pembayaran['nama_lengkap'] }}</td>
+                <td>{{ pembayaran['jenis_pembayaran'] }}</td>
+                <td>{{ pembayaran['bulan'] }} {{ pembayaran['tahun'] }}</td>
+                <td>Rp {{ '{:,.0f}'.format(pembayaran['nominal_tagihan']) }}</td>
+                <td>Rp {{ '{:,.0f}'.format(pembayaran['nominal_dibayar']) }}</td>
+                <td>Rp {{ '{:,.0f}'.format(pembayaran['nominal_tagihan'] - pembayaran['nominal_dibayar']) }}</td>
+                <td>{{ pembayaran['status_bayar'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('dashboard') }}" class="btn-back">Kembali ke Dashboard</a>
+   
+</div>
+{% endblock %}

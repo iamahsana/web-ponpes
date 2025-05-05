@@ -1,0 +1,27 @@
+{% extends 'base_dashboard.html' %}
+{% block title %}Dashboard Bendahara{% endblock %}
+
+{% block content %}
+<h2>Dashboard Bendahara</h2>
+<p>Selamat datang, {{ session['nama_lengkap'] }}!</p>
+
+<div class="dashboard-cards">
+    <div class="card">
+        <h3>Total Pembayaran Bulan Ini</h3>
+        <p>Rp {{ total_bulan_ini | format_uang }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Tunggakan Bulan Ini</h3>
+        <p>Rp {{ tunggakan_bulan_ini | format_uang }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Pembayaran Semua Waktu</h3>
+        <p>Rp {{ total_semua | format_uang }}</p>
+    </div>
+</div>
+
+<h3>Grafik Pembayaran Bulanan</h3>
+<canvas id="grafikBulanan" class="chart-grafik"
+        data-labels='{{ bulan_grafik | tojson }}'
+        data-values='{{ total_grafik | tojson }}'></canvas>
+{% endblock %}

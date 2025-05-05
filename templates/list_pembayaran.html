@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Daftar Pembayaran{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Daftar Pembayaran Santri</h2>
+
+    <a href="{{ url_for('tambah_pembayaran') }}" class="btn">Tambah Pembayaran Baru</a>
+    <a href="{{ url_for('export_pembayaran') }}" class="btn-export">Export Excel</a>
+    <a href="{{ url_for('dashboard') }}" class="btn-back">Kembali ke Dashboard</a>  
+    <!-- Form Filter -->
+    <form method="GET" action="{{ url_for('list_pembayaran') }}" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 20px 0;">
+        <input type="text" name="q" placeholder="Cari NIS / Nama Santri" value="{{ request.args.get('q', '') }}" style="flex: 1; min-width: 200px; padding: 8px;">
+    
+        <select name="bulan" style="padding: 8px;">
+            <option value="">-- Semua Bulan --</option>
+            {% for b in ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'] %}
+            <option value="{{ b }}" {% if bulan == b %}selected{% endif %}>{{ b }}</option>
+            {% endfor %}
+        </select>
+    
+        <input type="text" name="tahun" placeholder="Tahun" value="{{ tahun or '' }}" style="width: 100px; padding: 8px;">
+    
+        <button type="submit" class="btn" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">
+            Cari / Filter
+        </button>
+    </form>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama Santri</th>
+                <th>Jenis Pembayaran</th>
+                <th>Bulan - Tahun</th>
+                <th>Tagihan</th>
+                <th>Dibayar</th>
+                <th>Tanggal Bayar</th>
+                <th>Metode</th>
+                <th>Status</th>
+                <th>Kasir</th>
+                <th>Catatan</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pembayaran in pembayaran_list %}
+            <tr>
+                <td>{{ pembayaran['nama_lengkap'] }}</td>
+                <td>{{ pembayaran['jenis_pembayaran'] }}</td>
+                <td>{{ pembayaran['bulan'] }} {{ pembayaran['tahun'] }}</td>
+                <td>Rp {{ '{:,.0f}'.format(pembayaran['nominal_tagihan']) }}</td>
+                <td>Rp {{ '{:,.0f}'.format(pembayaran['nominal_dibayar']) }}</td>
+                <td>{{ pembayaran['tanggal_bayar'] }}</td>
+                <td>{{ pembayaran['metode_bayar'] }}</td>
+                <td>{{ pembayaran['status_bayar'] }}</td>
+                <td>{{ pembayaran['kasir'] }}</td>
+                <td>{{ pembayaran['catatan'] }}</td>
+                <td><a href="{{ url_for('detail_pembayaran', id=pembayaran['id_pembayaran']) }}" class="btn-detail">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    
+</div>
+{% endblock %}

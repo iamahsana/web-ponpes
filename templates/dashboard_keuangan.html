@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Keuangan{% endblock %}
+{% block content %}
+<div class="page-container">
+    <h2>Dashboard Keuangan</h2>
+    <p>Selamat datang, {{ session['nama_lengkap'] }}!</p>
+    <a href="{{ url_for('list_pembayaran') }}" class="btn">Daftar Pembayaran</a>
+    <a href="{{ url_for('list_tunggakan') }}" class="btn">Daftar Tunggakan</a>
+</div>
+{% endblock %}

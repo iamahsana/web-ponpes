@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}Settings Aplikasi{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h2>Settings Aplikasi</h2>
+    <p>Pengaturan umum aplikasi ERP Pondok Pesantren.</p>
+
+    <div class="settings-menu">
+        <ul>
+            <li><a href="#info">Informasi Pondok</a></li>
+            <li><a href="#preferensi">Preferensi Aplikasi</a></li>
+            <li><a href="#kalender">Kalender Akademik</a></li>
+            <li><a href="#notifikasi">Notifikasi & WA Gateway</a></li>
+            <li><a href="#backup">Backup & Restore</a></li>
+            <li><a href="#data">Data & Maintenance</a></li>
+            <li><a href="#keamanan">Keamanan</a></li>
+        </ul>
+    </div>
+
+    <hr>
+    <section id="info">
+        <h3>Informasi Pondok</h3>
+        <form method="post" action="#" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nama_pondok">Nama Pondok</label>
+                <input type="text" id="nama_pondok" name="nama_pondok" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat Lengkap</label>
+                <input type="text" id="alamat" name="alamat" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="kepala_pondok">Nama Kepala Pondok</label>
+                <input type="text" id="kepala_pondok" name="kepala_pondok" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="moto">Moto / Tagline</label>
+                <input type="text" id="moto" name="moto" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="logo">Logo Pondok</label>
+                <input type="file" id="logo" name="logo" class="form-control">
+            </div>
+            <button type="submit" class="btn">Simpan Informasi</button>
+        </form>
+    </section>
+
+    <hr>
+    <section id="preferensi">
+        <h3>Preferensi Aplikasi</h3>
+        <form method="post" action="#">
+            <div class="form-group">
+                <label for="tema">Tema Warna Dasar</label>
+                <select id="tema" name="tema" class="form-control">
+                    <option value="hijau">Hijau</option>
+                    <option value="biru">Biru</option>
+                    <option value="ungu">Ungu</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ukuran_upload">Ukuran Maksimal Upload (MB)</label>
+                <input type="number" id="ukuran_upload" name="ukuran_upload" class="form-control" min="1" max="10">
+            </div>
+            <div class="form-group">
+                <label for="format_santri">Format Penamaan Santri</label>
+                <select id="format_santri" name="format_santri" class="form-control">
+                    <option value="nis">NIS</option>
+                    <option value="auto">ID Otomatis</option>
+                    <option value="kombinasi">Kombinasi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pagination">Jumlah Data per Halaman</label>
+                <select id="pagination" name="pagination" class="form-control">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Simpan Preferensi</button>
+        </form>
+    </section>
+
+    <hr>
+    <section id="kalender">
+        <h3>Kalender Akademik</h3>
+        <form method="post" action="#">
+            <div class="form-group">
+                <label for="tahun_ajaran">Tahun Ajaran Aktif</label>
+                <input type="text" id="tahun_ajaran" name="tahun_ajaran" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="semester_mulai">Tanggal Mulai Semester</label>
+                <input type="date" id="semester_mulai" name="semester_mulai" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="semester_selesai">Tanggal Selesai Semester</label>
+                <input type="date" id="semester_selesai" name="semester_selesai" class="form-control">
+            </div>
+            <button type="submit" class="btn">Simpan Kalender</button>
+        </form>
+    </section>
+
+    <hr>
+    <section id="notifikasi">
+        <h3>Notifikasi & WA Gateway</h3>
+        <form method="post" action="#">
+            <div class="form-group">
+                <label for="aktifkan_notif">Aktifkan Notifikasi</label>
+                <select id="aktifkan_notif" name="aktifkan_notif" class="form-control">
+                    <option value="1">Aktif</option>
+                    <option value="0">Nonaktif</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="api_fonnte_1">API Key Fonnte 1</label>
+                <input type="text" id="api_fonnte_1" name="api_fonnte_1" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="api_fonnte_2">API Key Fonnte 2</label>
+                <input type="text" id="api_fonnte_2" name="api_fonnte_2" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="jadwal_kirim">Jadwal Kirim Laporan (format: setiap tanggal 1)</label>
+                <input type="text" id="jadwal_kirim" name="jadwal_kirim" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="template_pesan">Template Pesan Otomatis</label>
+                <textarea id="template_pesan" name="template_pesan" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn">Simpan Pengaturan WA</button>
+        </form>
+    </section>
+
+    <hr>
+    <section id="backup">
+        <h3>Backup & Restore Otomatis</h3>
+        <form method="post" action="#">
+            <div class="form-group">
+                <label for="jadwal_backup">Jadwal Backup Otomatis</label>
+                <select id="jadwal_backup" name="jadwal_backup" class="form-control">
+                    <option value="harian">Harian</option>
+                    <option value="mingguan">Mingguan</option>
+                    <option value="off">Nonaktif</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="durasi_backup">Simpan Backup Selama (hari)</label>
+                <input type="number" id="durasi_backup" name="durasi_backup" class="form-control" min="1">
+            </div>
+            <button type="submit" class="btn">Simpan Pengaturan Backup</button>
+        </form>
+    </section>
+
+    <hr>
+    <section id="data">
+        <h3>Data & Maintenance</h3>
+        <form method="post" action="#">
+            <div class="form-group">
+                <label>Reset Simulasi Data</label>
+                <button type="submit" class="btn-delete" name="reset_simulasi">Reset Simulasi</button>
+            </div>
+            <div class="form-group">
+                <label>Reset Seluruh Database</label>
+                <button type="submit" class="btn-delete" name="reset_database" onclick="return confirm('Yakin ingin reset semua data?')">Reset Total</button>
+            </div>
+            <div class="form-group">
+                <label>Export Pengaturan (.json)</label>
+                <button type="submit" class="btn" name="export_config">Export</button>
+            </div>
+            <div class="form-group">
+                <label for="import_config">Import Pengaturan (.json)</label>
+                <input type="file" id="import_config" name="import_config" class="form-control">
+                <button type="submit" class="btn">Import</button>
+            </div>
+        </form>
+    </section>
+
+    <hr>
+    <section id="keamanan">
+        <h3>Keamanan</h3>
+        <form method="post" action="#">
+            <div class="form-group">
+                <label for="timeout">Timeout Session (menit)</label>
+                <input type="number" id="timeout" name="timeout" class="form-control" min="5">
+            </div>
+            <div class="form-group">
+                <label for="ganti_password">Ganti Password Admin</label>
+                <input type="password" id="ganti_password" name="ganti_password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="konfirmasi_password">Konfirmasi Password</label>
+                <input type="password" id="konfirmasi_password" name="konfirmasi_password" class="form-control">
+            </div>
+            <button type="submit" class="btn">Simpan Keamanan</button>
+        </form>
+    </section>
+
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>
+</div>
+{% endblock %}

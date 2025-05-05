@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Laporan Keuangan Bulanan{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h2>Laporan Keuangan Per Bulan</h2>
+
+    <!-- Form Filter Bulan Tahun -->
+    <form method="GET" action="{{ url_for('laporan_bulanan') }}" class="form-filter">
+        <div class="form-group-inline">
+            <label for="bulan">Bulan:</label>
+            <select name="bulan" id="bulan" required>
+                <option value="">-- Pilih Bulan --</option>
+                {% for b in ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'] %}
+                <option value="{{ b }}" {% if bulan == b %}selected{% endif %}>{{ b }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group-inline">
+            <label for="tahun">Tahun:</label>
+            <input type="text" name="tahun" id="tahun" value="{{ tahun or '' }}" required>
+        </div>
+
+        <button type="submit" class="btn">Tampilkan</button>
+    </form>
+
+    {% if laporan_list %}
+    <!-- Tabel Laporan -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama Santri</th>
+                <th>Jenis Pembayaran</th>
+                <th>Nominal Dibayar</th>
+                <th>Tanggal Bayar</th>
+                <th>Metode Pembayaran</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pembayaran in laporan_list %}
+            <tr>
+                <td>{{ pembayaran['nama_lengkap'] }}</td>
+                <td>{{ pembayaran['jenis_pembayaran'] }}</td>
+                <td>Rp {{ '{:,.0f}'.format(pembayaran['nominal_dibayar']) }}</td>
+                <td>{{ pembayaran['tanggal_bayar'] }}</td>
+                <td>{{ pembayaran['metode_bayar'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total Pemasukan Bulan Ini: Rp {{ '{:,.0f}'.format(total_bulan_ini) }}</h3>
+    {% endif %}
+    {% if laporan_list %}
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Kembali ke Dashboard</a>
+    <a href="{{ url_for('export_laporan_bulanan', bulan=bulan, tahun=tahun) }}" class="btn-export">Export Laporan</a>
+    {% endif %}
+</div>
+{% endblock %}
